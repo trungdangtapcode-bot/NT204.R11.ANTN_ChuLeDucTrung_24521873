@@ -39,4 +39,8 @@ def process_packet(packet, capture_time):
     else:
         print(f"[Pipeline] {event['src_ip']} -> {event['dst_ip']} (Proto: {event['ip_proto']}) - No Transport")
     
+    # 4. Ghi log JSON Lines
+    from utils.logger import log_event
+    log_event(event, "TEST/output.jsonl")
+    
     return event
