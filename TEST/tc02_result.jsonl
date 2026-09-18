@@ -1,0 +1,1 @@
+{"packet_id": 1, "timestamp": 1789701847.2122386, "status": "PARSED_TRANSPORT", "src_ip": "10.0.0.1", "dst_ip": "10.0.0.2", "ip_proto": 6, "ttl": 64, "transport_proto": "TCP", "src_port": 12345, "dst_port": 80, "tcp_flags": "PA", "tcp_handshake": "", "payload_len": 41}
