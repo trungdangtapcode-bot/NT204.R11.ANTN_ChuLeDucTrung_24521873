@@ -1,12 +1,10 @@
+import sys, io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 import argparse
 from core.capture import start_capture
 
-def dummy_pipeline(packet, capture_time):
-    """
-    Hàm pipeline tạm thời để kiểm tra việc bắt gói tin.
-    Sẽ được thay thế bằng pipeline thật ở Task sau.
-    """
-    print(f"[{capture_time}] Đã bắt được packet dài {len(packet)} bytes")
+from core.pipeline import process_packet
 
 def main():
     parser = argparse.ArgumentParser(description="Packet Capture & Parser cho hệ thống IDS")
@@ -22,7 +20,7 @@ def main():
         start_capture(
             interface=args.interface,
             pcap_file=args.pcap,
-            packet_callback=dummy_pipeline
+            packet_callback=process_packet
         )
     except KeyboardInterrupt:
         print("\n[*] Đã dừng bắt gói tin.")
