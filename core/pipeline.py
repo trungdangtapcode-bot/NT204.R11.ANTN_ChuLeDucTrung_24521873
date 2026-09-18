@@ -24,10 +24,19 @@ def process_packet(packet, capture_time):
         event.update(network_info)
         event["status"] = "PARSED_NETWORK"
     else:
-        # Nếu không phải IPv4, đề bài yêu cầu không crash, đánh dấu là UNKNOWN hoặc bỏ qua
         return None 
 
-    # In ra màn hình để tạm thời theo dõi
-    print(f"[Pipeline] Đã parse: {event['src_ip']} -> {event['dst_ip']} (Proto: {event['ip_proto']})")
+    # 2. Transport Parser
+    from parsers.transport import parse_transport
+    transport_info = parse_transport(packet)
+    if transport_info:
+        event.update(transport_info)
+        event["status"] = "PARSED_TRANSPORT"
+        # Định dạng chuỗi log chi tiết hơn
+        proto_str = transport_info["transport_proto"]
+        port_info = f":{transport_info['src_port']} -> :{transport_info['dst_port']}"
+        print(f"[Pipeline] {event['src_ip']}{port_info} ({proto_str}) - Payload: {transport_info['payload_len']} bytes")
+    else:
+        print(f"[Pipeline] {event['src_ip']} -> {event['dst_ip']} (Proto: {event['ip_proto']}) - No Transport")
     
     return event
