@@ -1,0 +1,1 @@
+{"packet_id": 1, "timestamp": 1789985106.1958692, "status": "PARSED_APPLICATION", "src_ip": "10.0.0.1", "dst_ip": "10.0.0.2", "ip_proto": 6, "ttl": 64, "transport_proto": "TCP", "src_port": 1234, "dst_port": 80, "tcp_flags": "PA", "tcp_handshake": "", "payload_len": 47, "app_proto": "HTTP", "http_type": "Request", "http_method": "GET", "http_url": "/index.html"}
