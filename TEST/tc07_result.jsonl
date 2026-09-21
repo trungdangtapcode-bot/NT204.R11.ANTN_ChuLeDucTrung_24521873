@@ -1,0 +1,1 @@
+{"packet_id": 1, "timestamp": 1789985109.1296513, "status": "PARSED_APPLICATION", "src_ip": "10.0.0.1", "dst_ip": "8.8.8.8", "ip_proto": 17, "ttl": 64, "transport_proto": "UDP", "src_port": 1234, "dst_port": 53, "payload_len": 28, "app_proto": "DNS", "dns_type": "Query", "dns_query_domain": "google.com", "dns_query_type": 1}
