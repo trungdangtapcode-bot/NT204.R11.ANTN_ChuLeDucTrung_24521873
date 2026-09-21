@@ -1,0 +1,1 @@
+{"packet_id": 1, "timestamp": 1789985110.1493728, "status": "PARSED_APPLICATION", "src_ip": "8.8.8.8", "dst_ip": "10.0.0.1", "ip_proto": 17, "ttl": 64, "transport_proto": "UDP", "src_port": 53, "dst_port": 1234, "payload_len": 54, "app_proto": "DNS", "dns_type": "Response", "dns_answers": ["142.250.190.46"]}
