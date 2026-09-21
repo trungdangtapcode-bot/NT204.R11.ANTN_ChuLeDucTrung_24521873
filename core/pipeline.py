@@ -39,6 +39,16 @@ def process_packet(packet, capture_time):
     else:
         print(f"[Pipeline] {event['src_ip']} -> {event['dst_ip']} (Proto: {event['ip_proto']}) - No Transport")
     
+    # 3. Application Parser
+    from parsers.application import parse_application
+    app_info = parse_application(packet, transport_info)
+    if app_info and app_info.get("app_proto") != "UNKNOWN":
+        event.update(app_info)
+        event["status"] = "PARSED_APPLICATION"
+        app_proto = app_info["app_proto"]
+        app_type = app_info.get("http_type") or app_info.get("dns_type") or app_info.get("smtp_type", "")
+        print(f"   -> [App] {app_proto} {app_type}")
+    
     # 4. Ghi log JSON Lines
     from utils.logger import log_event
     log_event(event, "TEST/output.jsonl")
