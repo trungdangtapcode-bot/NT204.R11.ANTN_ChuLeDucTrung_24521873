@@ -49,6 +49,16 @@ def process_packet(packet, capture_time):
         app_type = app_info.get("http_type") or app_info.get("dns_type") or app_info.get("smtp_type", "")
         print(f"   -> [App] {app_proto} {app_type}")
     
+    # 4. Decoder - Giải mã payload (Bài tập 2)
+    from core.decoder import decode_payload
+    raw_payload = event.get("http_url") or event.get("http_body") or event.get("smtp_command") or ""
+    if raw_payload:
+        decode_result = decode_payload(raw_payload, event.get("app_proto"))
+        event["decoded_payload"] = decode_result["decoded_payload"]
+        event["encoding_detected"] = decode_result["encoding_detected"]
+        if decode_result["encoding_detected"] != "none":
+            print(f"   -> [Decoder] {decode_result['encoding_detected']}: {decode_result['decoded_payload'][:80]}")
+    
     # 4. Ghi log JSON Lines
     from utils.logger import log_event
     log_event(event, "TEST/output.jsonl")
