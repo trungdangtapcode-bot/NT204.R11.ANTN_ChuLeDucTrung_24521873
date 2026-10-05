@@ -59,7 +59,13 @@ def process_packet(packet, capture_time):
         if decode_result["encoding_detected"] != "none":
             print(f"   -> [Decoder] {decode_result['encoding_detected']}: {decode_result['decoded_payload'][:80]}")
     
-    # 4. Ghi log JSON Lines
+    # 5. Preprocessor - Chuẩn hóa và trích xuất feature (Bài tập 2)
+    from core.preprocessor import preprocess_event
+    event = preprocess_event(event)
+    if event.get("feature_entropy", 0) > 0:
+        print(f"   -> [Preprocessor] Entropy: {event['feature_entropy']}, SpecialChars: {event['feature_special_char_count']}")
+    
+    # 6. Ghi log JSON Lines
     from utils.logger import log_event
     log_event(event, "TEST/output.jsonl")
     
