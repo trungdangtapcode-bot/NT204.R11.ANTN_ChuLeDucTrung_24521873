@@ -65,7 +65,14 @@ def process_packet(packet, capture_time):
     if event.get("feature_entropy", 0) > 0:
         print(f"   -> [Preprocessor] Entropy: {event['feature_entropy']}, SpecialChars: {event['feature_special_char_count']}")
     
-    # 6. Ghi log JSON Lines
+    # 6. Flow Tracker - Theo dõi kết nối (Bài tập 2)
+    from core.flow_tracker import flow_tracker
+    if transport_info:
+        flow_info = flow_tracker.track(event)
+        event.update(flow_info)
+        print(f"   -> [Flow] {flow_info['flow_id'][:60]} | Pkts: {flow_info['flow_packet_count']}, Bytes: {flow_info['flow_total_bytes']}, State: {flow_info['flow_tcp_state']}")
+    
+    # 7. Ghi log JSON Lines
     from utils.logger import log_event
     log_event(event, "TEST/output.jsonl")
     
