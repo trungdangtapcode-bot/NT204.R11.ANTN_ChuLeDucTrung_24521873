@@ -44,8 +44,16 @@ class Flow:
         # Application protocol đã nhận diện
         self.app_proto = "UNKNOWN"
 
+        # Initiator (Client) tracking
+        self.initiator_ip = None
+        self.initiator_port = None
+
     def update(self, event):
         """Cập nhật flow với thông tin từ packet mới."""
+        if self.initiator_ip is None:
+            self.initiator_ip = event.get("src_ip")
+            self.initiator_port = event.get("src_port")
+
         self.packet_count += 1
         self.total_bytes += event.get("payload_len", 0)
         self.last_seen = event.get("timestamp", time.time())
@@ -162,12 +170,14 @@ class FlowTracker:
 
         # Trả về thông tin flow
         flow = self.flows[flow_key]
+        direction = "to_server" if (event.get("src_ip") == flow.initiator_ip and event.get("src_port") == flow.initiator_port) else "to_client"
         return {
             "flow_id": str(flow_key),
             "flow_packet_count": flow.packet_count,
             "flow_total_bytes": flow.total_bytes,
             "flow_duration": flow.duration,
-            "flow_tcp_state": flow.tcp_state if flow.protocol == "TCP" else "N/A"
+            "flow_tcp_state": flow.tcp_state if flow.protocol == "TCP" else "N/A",
+            "flow_direction": direction
         }
 
     def get_all_flows(self):
