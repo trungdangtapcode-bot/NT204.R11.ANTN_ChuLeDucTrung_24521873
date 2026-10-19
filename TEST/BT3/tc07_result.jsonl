@@ -1,0 +1,1 @@
+{"test_case": "TC07", "description": "Header không match thì rule bị loại ngay trước khi xét content", "status": "PASS", "header_matched": false, "rule_matched": false, "rejection_reason": "Header mismatch"}
