@@ -14,7 +14,15 @@ def main():
     group.add_argument("--interface", type=str, help="Tên network interface (vd: eth0, Wi-Fi)")
     group.add_argument("--pcap", type=str, help="Đường dẫn tới file PCAP")
 
+    # Tùy chọn đường dẫn file/thư mục Snort rules (Bài tập 3)
+    parser.add_argument("--rules", type=str, default=None, help="Đường dẫn tới file hoặc thư mục .rules")
+
     args = parser.parse_args()
+
+    # Nạp rules nếu có
+    if args.rules:
+        from core.pipeline import init_rules
+        init_rules(args.rules)
 
     try:
         start_capture(

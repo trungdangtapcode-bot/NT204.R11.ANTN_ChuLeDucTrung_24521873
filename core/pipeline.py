@@ -72,8 +72,35 @@ def process_packet(packet, capture_time):
         event.update(flow_info)
         print(f"   -> [Flow] {flow_info['flow_id'][:60]} | Pkts: {flow_info['flow_packet_count']}, Bytes: {flow_info['flow_total_bytes']}, State: {flow_info['flow_tcp_state']}")
     
-    # 7. Ghi log JSON Lines
+    # 7. Rule Evaluation Engine & Detection Event Generator (Bài tập 3)
+    alerts = rule_evaluator.evaluate(event)
+    if alerts:
+        event["detection_alerts"] = alerts
+        for alert in alerts:
+            print(f"   -> [ALERT] [SID:{alert['sid']}] {alert['msg']} | {alert['matched_information']}")
+
+    # 8. Ghi log JSON Lines
     from utils.logger import log_event
     log_event(event, "TEST/output.jsonl")
+    if alerts:
+        for alert in alerts:
+            log_event(alert, "TEST/alerts.jsonl")
     
     return event
+
+
+# Khởi tạo Rule Evaluation Engine toàn cục
+from core.rule_evaluator import RuleEvaluationEngine
+from core.rule_indexer import RuleRepository
+from core.rule_loader import load_rules
+
+rule_repo = RuleRepository()
+rule_evaluator = RuleEvaluationEngine(rule_repo)
+
+def init_rules(rules_path):
+    """Nạp rules từ file hoặc thư mục vào repository."""
+    valid, invalid, unsupported, stats = load_rules(rules_path)
+    rule_repo.add_rules(valid)
+    print(f"[*] Đã nạp {rule_repo.count()} rules vào Core Engine.")
+    return stats
+
