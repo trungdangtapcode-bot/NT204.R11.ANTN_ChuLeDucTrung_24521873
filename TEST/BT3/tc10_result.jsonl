@@ -1,0 +1,1 @@
+{"test_case": "TC10", "description": "offset/depth chỉ match trong vùng được chỉ định", "status": "PASS", "valid_payload_matches": {"rule_start": true, "rule_window": true}, "shifted_payload_match": false, "outside_window_match": false}
