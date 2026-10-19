@@ -1,0 +1,1 @@
+{"test_case": "TC05", "description": "Direction -> và <> so khớp đúng chiều / bidirectional", "status": "PASS", "details": {"forward_packet": {"rule_forward_match": true, "rule_bidirectional_match": true}, "backward_packet": {"rule_forward_match": false, "rule_bidirectional_match": true}}}

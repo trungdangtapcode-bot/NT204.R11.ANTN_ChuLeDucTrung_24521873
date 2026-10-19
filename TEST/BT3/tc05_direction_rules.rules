@@ -1,0 +1,7 @@
+# Test Case 05: Direction matching -> and <>
+
+# Rule 1: Mot chieu (Unidirectional ->)
+alert tcp 10.0.0.1 1234 -> 192.168.1.1 80 (msg:"Unidirectional Forward Only"; sid:500001; rev:1;)
+
+# Rule 2: Hai chieu (Bidirectional <>)
+alert tcp 10.0.0.1 1234 <> 192.168.1.1 80 (msg:"Bidirectional Traffic"; sid:500002; rev:1;)
