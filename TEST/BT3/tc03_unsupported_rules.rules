@@ -1,0 +1,12 @@
+# Test Case 03: Rules with unsupported keywords or protocols
+# 1. Rule dung keyword pcre (ngoai pham vi bat buoc):
+alert tcp any any -> any 80 (msg:"Unsupported PCRE Keyword"; pcre:"/etc/passwd"; sid:300001; rev:1;)
+
+# 2. Rule dung keyword byte_test (ngoai pham vi bat buoc):
+alert tcp any any -> any 80 (msg:"Unsupported Byte Test"; byte_test:4,>,1000,0; sid:300002; rev:1;)
+
+# 3. Rule dung protocol sctp (chua ho tro):
+alert sctp any any -> any any (msg:"Unsupported Protocol SCTP"; sid:300003; rev:1;)
+
+# 4. Rule hop le dong hanh de chung minh engine van chay binh thuong:
+alert tcp any any -> 10.0.0.1 80 (msg:"Supported Normal Rule"; content:"test"; sid:300004; rev:1;)
