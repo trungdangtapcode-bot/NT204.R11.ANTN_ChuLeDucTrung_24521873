@@ -1,0 +1,2 @@
+# Test Case 08: Flow option matching: flow:to_server,established
+alert tcp any any -> any 80 (msg:"HTTP Request in Established Connection"; flow:to_server,established; content:"GET"; sid:800001; rev:1;)
