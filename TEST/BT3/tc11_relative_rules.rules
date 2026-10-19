@@ -1,0 +1,2 @@
+# Test Case 11: Two content matches with relative modifiers: distance and within
+alert tcp any any -> any 80 (msg:"Two Contents Relative Match"; content:"login"; content:"password"; distance:1; within:15; sid:1100001; rev:1;)
