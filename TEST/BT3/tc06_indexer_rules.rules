@@ -1,0 +1,8 @@
+# Test Case 06: Rule Repository & Indexer query test
+# Rules voi cac giao thuc va port khac nhau:
+alert ip any any -> any any (msg:"All IP Traffic"; sid:600001; rev:1;)
+alert tcp any any -> any 80 (msg:"TCP Port 80 HTTP"; sid:600002; rev:1;)
+alert tcp any any -> any 443 (msg:"TCP Port 443 HTTPS"; sid:600003; rev:1;)
+alert tcp any any -> any any (msg:"TCP Any Port"; sid:600004; rev:1;)
+alert udp any any -> any 53 (msg:"UDP Port 53 DNS"; sid:600005; rev:1;)
+alert udp any any -> any any (msg:"UDP Any Port"; sid:600006; rev:1;)

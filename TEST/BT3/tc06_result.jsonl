@@ -1,0 +1,1 @@
+{"test_case": "TC06", "description": "Indexer với IP, TCP, UDP và any trả đúng tập candidate rules", "status": "PASS", "tcp_80_candidates": [600001, 600002, 600004], "udp_53_candidates": [600001, 600005, 600006]}
