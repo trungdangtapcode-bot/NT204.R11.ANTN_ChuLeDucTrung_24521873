@@ -1,0 +1,19 @@
+# ==========================================
+# Test Case 01: Rules file with comments & blank lines
+# ==========================================
+
+# Rule 1: HTTP GET traversal alert
+alert tcp any any -> 192.168.1.1 80 (msg:"Directory Traversal Attempt"; content:"../"; sid:100001; rev:1;)
+
+# Rule 2: SQL Injection test
+alert tcp any any -> 192.168.1.1 80 (msg:"SQL Injection in URI"; content:"UNION SELECT"; nocase; sid:100002; rev:1;)
+
+# Dòng trống phía dưới
+
+# Disabled rule (comment-out)
+# alert tcp any any -> any any (msg:"Disabled Rule"; sid:100003; rev:1;)
+
+# Rule 3: DNS Query
+alert udp any any -> 8.8.8.8 53 (msg:"DNS Query Detected"; content:"google.com"; sid:100004; rev:1;)
+
+# Kết thúc file
