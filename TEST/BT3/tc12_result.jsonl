@@ -1,0 +1,1 @@
+{"test_case": "TC12", "description": "flags và dsize match/không match đúng theo event", "status": "PASS", "results": {"syn_empty_match": true, "syn_with_data_match": false, "psh_ack_large_match": true, "ack_only_match": false}}

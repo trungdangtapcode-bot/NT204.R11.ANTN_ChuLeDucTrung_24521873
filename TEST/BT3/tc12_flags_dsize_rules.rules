@@ -1,0 +1,6 @@
+# Test Case 12: TCP flags and payload dsize matching
+# Rule 1: TCP SYN packet with empty payload (dsize: 0)
+alert tcp any any -> any 80 (msg:"TCP SYN without payload"; flags:S; dsize:0; sid:1200001; rev:1;)
+
+# Rule 2: TCP PSH+ACK packet with payload size > 50 bytes
+alert tcp any any -> any 80 (msg:"TCP PSH+ACK with large payload"; flags:PA; dsize:>50; sid:1200002; rev:1;)
