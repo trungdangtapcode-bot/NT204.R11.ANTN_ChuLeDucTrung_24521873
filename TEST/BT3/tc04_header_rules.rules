@@ -1,0 +1,10 @@
+# Test Case 04: Header parsing with various IP (any, single, CIDR) and Port (any, single, range)
+
+# Rule 1: TCP + any IP, any port -> single IP, single port
+alert tcp any any -> 192.168.1.100 80 (msg:"TCP single IP and single port"; sid:400001; rev:1;)
+
+# Rule 2: TCP + CIDR IP, port range 1024:65535 -> any IP, port range :1024
+alert tcp 10.0.0.0/24 1024:65535 -> any :1024 (msg:"TCP CIDR and port ranges"; sid:400002; rev:1;)
+
+# Rule 3: UDP + any IP/port -> any IP/port
+alert udp any any -> any any (msg:"UDP any all"; sid:400003; rev:1;)
