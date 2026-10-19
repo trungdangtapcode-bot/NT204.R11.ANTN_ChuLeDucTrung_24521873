@@ -1,0 +1,15 @@
+# Test Case 02: Syntax error rules (invalid rules)
+# Rule sai header (thieu phan tu):
+alert tcp any -> any (msg:"Missing Header Fields"; sid:200001;)
+
+# Rule sai action:
+unknown_action tcp any any -> any any (msg:"Unknown Action"; sid:200002;)
+
+# Rule sai IP:
+alert tcp 999.999.999.999 any -> any any (msg:"Invalid IP format"; sid:200003;)
+
+# Rule thieu SID bat buoc:
+alert tcp any any -> any any (msg:"Missing SID option";)
+
+# Rule hop le de chung minh engine tiep tuc chay khong bi dung:
+alert tcp any any -> 192.168.1.100 80 (msg:"Valid Rule Should Still Load"; sid:200005; rev:1;)
