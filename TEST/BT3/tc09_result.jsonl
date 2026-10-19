@@ -1,0 +1,1 @@
+{"test_case": "TC09", "description": "content có/không có nocase phân biệt hoặc không phân biệt hoa thường đúng", "status": "PASS", "mixed_case_result": {"nocase_rule_matched": true, "case_sensitive_rule_matched": false}, "exact_case_result": {"nocase_rule_matched": true, "case_sensitive_rule_matched": true}}

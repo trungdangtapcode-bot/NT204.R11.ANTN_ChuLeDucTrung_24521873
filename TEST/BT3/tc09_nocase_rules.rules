@@ -1,0 +1,6 @@
+# Test Case 09: content with nocase vs case-sensitive content
+# Rule 1: Co nocase (khong phan biet hoa thuong)
+alert tcp any any -> any 80 (msg:"Nocase Matching Pattern"; content:"cmd.exe"; nocase; sid:900001; rev:1;)
+
+# Rule 2: Khong co nocase (phan biet hoa thuong chinh xac)
+alert tcp any any -> any 80 (msg:"Case-sensitive Matching Pattern"; content:"cmd.exe"; sid:900002; rev:1;)
