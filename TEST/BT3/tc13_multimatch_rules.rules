@@ -1,0 +1,12 @@
+# Test Case 13: Multi-rule matching on a single event
+# Rule 1: Phat hien "UNION SELECT"
+alert tcp any any -> any 80 (msg:"SQLi: UNION SELECT detected"; content:"UNION SELECT"; nocase; sid:1300001; priority:1;)
+
+# Rule 2: Phat hien nhay don va UNION
+alert tcp any any -> any 80 (msg:"SQLi: Single quote and UNION"; content:"' UNION"; nocase; sid:1300002; priority:1;)
+
+# Rule 3: Phat hien tu khoa "password"
+alert tcp any any -> any 80 (msg:"SQLi: Credential access attempted"; content:"password"; nocase; sid:1300003; priority:2;)
+
+# Rule 4: Rule khong khop (content khac)
+alert tcp any any -> any 80 (msg:"Directory Traversal"; content:"/etc/shadow"; sid:1300004; priority:1;)

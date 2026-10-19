@@ -1,0 +1,1 @@
+{"test_case": "TC13", "description": "Một event match đồng thời >= 2 rule sinh đầy đủ tất cả kết quả match", "status": "PASS", "matched_count": 3, "matched_sids": [1300001, 1300003, 1300002], "stats": {"events_evaluated": 1, "candidates_checked": 4, "total_matches": 3}}
